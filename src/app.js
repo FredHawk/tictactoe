@@ -1,5 +1,7 @@
 import css from './style.css';
 
+const gameboard = document.querySelector('.gameboard');
+
 const game = {
   currentPlayer: 'X',
   human: '',
@@ -37,4 +39,17 @@ function aiMove () {
 // Update state ? updating the board and changing player and other stuff.
 function updateState () {
 
+  changePlayer();
 }
+
+function handleMove (e) {
+  // if(e.target.id == true) {
+  //   console.log(e.target.id);
+  // }
+  console.log((e.target.id.split('').pop()) - 1);
+  game.board[(e.target.id.split('').pop()) - 1] = game.currentPlayer;
+  console.log(game.board);
+  updateState();
+}
+
+gameboard.addEventListener('click', (e) => handleMove(e));
