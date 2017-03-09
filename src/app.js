@@ -15,11 +15,14 @@ const game = {
 // Function that calculates if someone has won
 function whoWon () {
 
+  // if no one has won when board is filled up then it is a draw.
+  return false;
 }
 
 // Function that runs when turn = 9 (whole board is filled and no one won)
 function draw() {
-
+  // check if it is a draw.
+  console.log('No winner, it is a draw');
 }
 
 // Function that changes who the currentPlayer is
@@ -39,7 +42,13 @@ function aiMove () {
 // Update state ? updating the board and changing player and other stuff.
 function updateState () {
 
-  changePlayer();
+  whoWon();
+  if (game.turn == 8 && whoWon() == false) {
+    draw();
+  } else {
+    changePlayer();
+    game.turn++;
+  }
 }
 
 function handleMove (e) {
