@@ -44,7 +44,9 @@ function updateState () {
 
 function handleMove (e) {
   console.log((e.target.id.split('').pop()) - 1);
-  game.board[(e.target.id.split('').pop()) - 1] = game.currentPlayer;
+  if (game.board[(e.target.id.split('').pop()) - 1] === null) {
+    game.board[(e.target.id.split('').pop()) - 1] = game.currentPlayer;
+  }
   console.log(game.board);
   updateState();
 }
