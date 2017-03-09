@@ -43,9 +43,6 @@ function updateState () {
 }
 
 function handleMove (e) {
-  // if(e.target.id == true) {
-  //   console.log(e.target.id);
-  // }
   console.log((e.target.id.split('').pop()) - 1);
   game.board[(e.target.id.split('').pop()) - 1] = game.currentPlayer;
   console.log(game.board);
