@@ -39,14 +39,18 @@ function aiMove () {
 
 }
 
-// Update state ? updating the board and changing player and other stuff.
-function updateState () {
-  let updatedBoard = '';
-  game.board.map((cell, index) => {
-    updatedBoard += `
+function render (cell, index) {
+  // console.log();
+  // ${(cell === null) ? cell = '' : cell}
+  // ${index + 1}
+  return `
       <div id="square${index + 1}" class="square"><span>${(cell === null) ? cell = '' : cell}</span></div>
     `;
-  });
+}
+// Update state ? updating the board and changing player and other stuff.
+function updateState () {
+  const updatedBoard = game.board.map(render).join('');
+  console.log(updatedBoard);
   gameboard.innerHTML = updatedBoard;
   whoWon();
   if (game.turn == 8 && whoWon() == false) {
@@ -66,7 +70,7 @@ function resetGame() {
 }
 
 function handleMove (e) {
-  console.log((e.target.id.split('').pop()) - 1);
+  // console.log((e.target.id.split('').pop()) - 1);
   if (game.board[(e.target.id.split('').pop()) - 1] === null) {
     game.board[(e.target.id.split('').pop()) - 1] = game.currentPlayer;
   }
