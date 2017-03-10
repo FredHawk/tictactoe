@@ -41,7 +41,13 @@ function aiMove () {
 
 // Update state ? updating the board and changing player and other stuff.
 function updateState () {
-
+  let updatedBoard = '';
+  game.board.map((cell, index) => {
+    updatedBoard += `
+      <div id="square${index + 1}" class="square">${(cell === null) ? cell = '' : cell}</div>
+    `;
+  });
+  gameboard.innerHTML = updatedBoard;
   whoWon();
   if (game.turn == 8 && whoWon() == false) {
     draw();
