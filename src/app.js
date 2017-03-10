@@ -40,9 +40,6 @@ function aiMove () {
 }
 
 function render (cell, index) {
-  // console.log();
-  // ${(cell === null) ? cell = '' : cell}
-  // ${index + 1}
   return `
       <div id="square${index + 1}" class="square"><span>${(cell === null) ? cell = '' : cell}</span></div>
     `;
@@ -50,7 +47,6 @@ function render (cell, index) {
 // Update state ? updating the board and changing player and other stuff.
 function updateState () {
   const updatedBoard = game.board.map(render).join('');
-  console.log(updatedBoard);
   gameboard.innerHTML = updatedBoard;
   whoWon();
   if (game.turn == 8 && whoWon() == false) {
