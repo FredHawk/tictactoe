@@ -13,8 +13,12 @@ body {
 }
 
 .square {
-  /*width: 98px;*/
   height: 98px;
   border: blue solid 1px;
   flex: 0 0 32%;
+  font-size: 4rem;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

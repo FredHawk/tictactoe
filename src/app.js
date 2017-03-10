@@ -44,7 +44,7 @@ function updateState () {
   let updatedBoard = '';
   game.board.map((cell, index) => {
     updatedBoard += `
-      <div id="square${index + 1}" class="square">${(cell === null) ? cell = '' : cell}</div>
+      <div id="square${index + 1}" class="square"><span>${(cell === null) ? cell = '' : cell}</span></div>
     `;
   });
   gameboard.innerHTML = updatedBoard;
