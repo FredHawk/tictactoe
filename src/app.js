@@ -51,6 +51,14 @@ function updateState () {
   }
 }
 
+function resetGame() {
+  game.currentPlayer = 'X';
+  game.human = '';
+  game.computer = '';
+  game.turn = 0;
+  game.board = [null, null, null, null, null, null, null, null, null];
+}
+
 function handleMove (e) {
   console.log((e.target.id.split('').pop()) - 1);
   if (game.board[(e.target.id.split('').pop()) - 1] === null) {
