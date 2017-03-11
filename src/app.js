@@ -80,6 +80,7 @@ function resetGame() {
 }
 
 function handleMove (e) {
+  // Check if move is valid, if it is, update board and state
   if (game.board[(e.target.id.split('').pop()) - 1] === null) {
     game.board[(e.target.id.split('').pop()) - 1] = game.currentPlayer;
     updateState();
