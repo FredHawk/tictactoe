@@ -18,6 +18,7 @@ const game = {
 function setPlayers () {
   game.human == 'X' ? game.computer = 'O' : game.computer = 'X';
 }
+
 // Function that calculates if someone has won
 function whoWon () {
 
