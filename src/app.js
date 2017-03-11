@@ -39,22 +39,35 @@ function aiMove () {
 
 }
 
+function checkCell (cell) {
+  if (cell === null) {
+    return cell = '';
+  } else {
+    return cell = cell;
+  }
+}
+
 function render (cell, index) {
   return `
-      <div id="square${index + 1}" class="square"><span>${(cell === null) ? cell = '' : cell}</span></div>
+      <div id="square${index + 1}" class="square"><span>${checkCell(cell)}</span></div>
     `;
+}
+
+function countOccurance (n, val) {
+  return n + (val === null);
 }
 // Update state ? updating the board and changing player and other stuff.
 function updateState () {
   const updatedBoard = game.board.map(render).join('');
   gameboard.innerHTML = updatedBoard;
   whoWon();
-  if (game.turn == 8 && whoWon() == false) {
+  if (game.turn >= 8 && whoWon() == false) {
     draw();
-  } else {
-    changePlayer();
-    game.turn++;
   }
+  changePlayer();
+  console.log(game.currentPlayer);
+  game.turn++;
+  console.log(game.turn);
 }
 
 function resetGame() {
@@ -63,15 +76,15 @@ function resetGame() {
   game.computer = '';
   game.turn = 0;
   game.board = [null, null, null, null, null, null, null, null, null];
+  gameboard.innerHTML = '';
 }
 
 function handleMove (e) {
-  // console.log((e.target.id.split('').pop()) - 1);
   if (game.board[(e.target.id.split('').pop()) - 1] === null) {
     game.board[(e.target.id.split('').pop()) - 1] = game.currentPlayer;
+    updateState();
   }
   console.log(game.board);
-  updateState();
 }
 
 gameboard.addEventListener('click', (e) => handleMove(e));
