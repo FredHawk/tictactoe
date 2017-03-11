@@ -53,9 +53,7 @@ function render (cell, index) {
     `;
 }
 
-function countOccurance (n, val) {
-  return n + (val === null);
-}
+
 // Update state ? updating the board and changing player and other stuff.
 function updateState () {
   const updatedBoard = game.board.map(render).join('');
