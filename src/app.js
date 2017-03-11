@@ -1,6 +1,8 @@
 import css from './style.css';
 
 const gameboard = document.querySelector('.gameboard');
+const reset = document.querySelector('.reset');
+const square = document.querySelectorAll('.square');
 
 const game = {
   currentPlayer: 'X',
@@ -12,6 +14,10 @@ const game = {
           null, null, null],
 }
 
+// Set which is human and which is AI.
+function setPlayers () {
+  game.human == 'X' ? game.computer = 'O' : game.computer = 'X';
+}
 // Function that calculates if someone has won
 function whoWon () {
 
@@ -27,16 +33,15 @@ function draw() {
 
 // Function that changes who the currentPlayer is
 function changePlayer () {
-  if (game.currentPlayer == 'X') {
-    game.currentPlayer = 'O';
-  } else {
-    game.currentPlayer = 'X';
-  }
+  game.currentPlayer == 'X' ? game.currentPlayer = 'O' : game.currentPlayer = 'X';
 }
 
 // AI function - Don't know how to do this one yet.
 function aiMove () {
+  // Add a setTimeout of 1 second so it seems more real like the computer thinks.
+  setTimeout(function() {
 
+  }, 1000);
 }
 
 function checkCell (cell) {
@@ -68,13 +73,23 @@ function updateState () {
   console.log(game.turn);
 }
 
-function resetGame() {
+function resetGame(e) {
+  e.preventDefault();
   game.currentPlayer = 'X';
   game.human = '';
   game.computer = '';
   game.turn = 0;
   game.board = [null, null, null, null, null, null, null, null, null];
-  gameboard.innerHTML = '';
+  gameboard.innerHTML = `
+      <div id="square1" class="square"></div>
+      <div id="square2" class="square"></div>
+      <div id="square3" class="square"></div>
+      <div id="square4" class="square"></div>
+      <div id="square5" class="square"></div>
+      <div id="square6" class="square"></div>
+      <div id="square7" class="square"></div>
+      <div id="square8" class="square"></div>
+      <div id="square9" class="square"></div>`;
 }
 
 function handleMove (e) {
@@ -87,3 +102,4 @@ function handleMove (e) {
 }
 
 gameboard.addEventListener('click', (e) => handleMove(e));
+reset.addEventListener('click', (e) => resetGame(e));
