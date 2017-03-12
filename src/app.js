@@ -23,7 +23,10 @@ function setPlayers () {
 
 // Function that calculates if someone has won
 function whoWon () {
-
+  // ****************** 
+  // Implement the win check.
+  // ******************
+  
   // if no one has won when board is filled up then it is a draw.
   return false;
 }
@@ -42,9 +45,8 @@ function changePlayer () {
 function getRandomCell () {
   return Math.floor(Math.random() * game.board.length);
 }
-// AI function - Don't know how to do this one yet.
+
 function aiMove () {
-  // Add a setTimeout of 1 second so it seems more real like the computer thinks.
   if (game.difficulty == 'easy') {
 
     const rand = getRandomCell();
@@ -93,7 +95,6 @@ function updateState () {
   console.log('Curr player:', game.currentPlayer);
   game.turn++;
   console.log('Curr turn:',game.turn);
-  // ********* Add check for if current player === computer. If that is true then run aiMove();
   if (game.currentPlayer === game.computer) {
     aiMove();
   }
