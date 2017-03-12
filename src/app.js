@@ -8,6 +8,7 @@ const game = {
   currentPlayer: 'X',
   human: 'X',
   computer: 'O',
+  difficulty: 'easy',
   turn: 0,
   board: [null, null, null,
           null, null, null,
@@ -38,12 +39,31 @@ function changePlayer () {
   game.currentPlayer == 'X' ? game.currentPlayer = 'O' : game.currentPlayer = 'X';
 }
 
+function getRandomCell () {
+  return Math.floor(Math.random() * game.board.length);
+}
 // AI function - Don't know how to do this one yet.
 function aiMove () {
   // Add a setTimeout of 1 second so it seems more real like the computer thinks.
-  setTimeout(function() {
+  if (game.difficulty == 'easy') {
 
-  }, 1000);
+    const rand = getRandomCell();
+    console.log('rand:', rand);
+    if (game.board[rand]) {
+      // run the randomize function again
+      aiMove();
+      console.log('rand is null:', rand);
+    } else {
+      // update array
+      game.board[rand] = game.currentPlayer;
+      console.log('rand not null:', rand);
+      setTimeout(function() {
+        updateState();
+      }, 1000);
+    }
+  } else {
+
+  }
 }
 
 function checkCell (cell) {
@@ -70,10 +90,13 @@ function updateState () {
     draw();
   }
   changePlayer();
-  console.log(game.currentPlayer);
+  console.log('Curr player:', game.currentPlayer);
   game.turn++;
-  console.log(game.turn);
+  console.log('Curr turn:',game.turn);
   // ********* Add check for if current player === computer. If that is true then run aiMove();
+  if (game.currentPlayer === game.computer) {
+    aiMove();
+  }
 }
 
 function resetGame(e) {
@@ -81,6 +104,7 @@ function resetGame(e) {
   game.currentPlayer = 'X';
   game.human = 'X';
   game.computer = 'O';
+  difficulty: 'easy',
   game.turn = 0;
   game.board = [null, null, null, null, null, null, null, null, null];
   gameboard.innerHTML = `
