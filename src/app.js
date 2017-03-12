@@ -6,8 +6,8 @@ const square = document.querySelectorAll('.square');
 
 const game = {
   currentPlayer: 'X',
-  human: '',
-  computer: '',
+  human: 'X',
+  computer: 'O',
   turn: 0,
   board: [null, null, null,
           null, null, null,
@@ -17,6 +17,7 @@ const game = {
 // Set which is human and which is AI.
 function setPlayers () {
   game.human == 'X' ? game.computer = 'O' : game.computer = 'X';
+  // Set the game.human and game.computer based on click event listener.
 }
 
 // Function that calculates if someone has won
@@ -72,13 +73,14 @@ function updateState () {
   console.log(game.currentPlayer);
   game.turn++;
   console.log(game.turn);
+  // ********* Add check for if current player === computer. If that is true then run aiMove();
 }
 
 function resetGame(e) {
   e.preventDefault();
   game.currentPlayer = 'X';
-  game.human = '';
-  game.computer = '';
+  game.human = 'X';
+  game.computer = 'O';
   game.turn = 0;
   game.board = [null, null, null, null, null, null, null, null, null];
   gameboard.innerHTML = `
