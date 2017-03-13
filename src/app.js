@@ -23,18 +23,43 @@ function setPlayers () {
 
 // Function that calculates if someone has won
 function whoWon () {
-  // ****************** 
-  // Implement the win check.
-  // ******************
-  
-  // if no one has won when board is filled up then it is a draw.
-  return false;
-}
-
-// Function that runs when turn = 9 (whole board is filled and no one won)
-function draw() {
-  // check if it is a draw.
-  console.log('No winner, it is a draw');
+  switch (true) {
+    case game.board[0] === game.currentPlayer && game.board[1] === game.currentPlayer && game.board[2] === game.currentPlayer: 
+      console.log(`${game.currentPlayer} has won!`);
+      return true;
+      break;
+    case game.board[3] === game.currentPlayer && game.board[4] === game.currentPlayer && game.board[5] === game.currentPlayer: 
+      console.log(`${game.currentPlayer} has won!`);
+      return true;
+      break;
+    case game.board[6] === game.currentPlayer && game.board[7] === game.currentPlayer && game.board[8] === game.currentPlayer: 
+      console.log(`${game.currentPlayer} has won!`);
+      return true;
+      break;
+    case game.board[0] === game.currentPlayer && game.board[3] === game.currentPlayer && game.board[6] === game.currentPlayer: 
+      console.log(`${game.currentPlayer} has won!`);
+      return true;
+      break;
+    case game.board[1] === game.currentPlayer && game.board[4] === game.currentPlayer && game.board[7] === game.currentPlayer: 
+      console.log(`${game.currentPlayer} has won!`);
+      return true;
+      break;
+    case game.board[2] === game.currentPlayer && game.board[5] === game.currentPlayer && game.board[8] === game.currentPlayer: 
+      console.log(`${game.currentPlayer} has won!`);
+      return true;
+      break;
+    case game.board[0] === game.currentPlayer && game.board[4] === game.currentPlayer && game.board[8] === game.currentPlayer: 
+      console.log(`${game.currentPlayer} has won!`);
+      return true;
+      break;
+    case game.board[2] === game.currentPlayer && game.board[4] === game.currentPlayer && game.board[6] === game.currentPlayer: 
+      console.log(`${game.currentPlayer} has won!`);
+      return true;
+      break;
+    default:
+      return false;
+      break;
+  }
 }
 
 // Function that changes who the currentPlayer is
@@ -87,16 +112,22 @@ function render (cell, index) {
 function updateState () {
   const updatedBoard = game.board.map(render).join('');
   gameboard.innerHTML = updatedBoard;
-  whoWon();
-  if (game.turn >= 8 && whoWon() == false) {
-    draw();
-  }
-  changePlayer();
-  console.log('Curr player:', game.currentPlayer);
-  game.turn++;
-  console.log('Curr turn:',game.turn);
-  if (game.currentPlayer === game.computer) {
-    aiMove();
+  if (whoWon() === true) {
+    console.log(`${game.currentPlayer} has won!`);
+    // Show modal of who has won and a button to reset game.
+
+  } else if (game.turn >= 8 && whoWon() == false) {
+    console.log('No winner, it is a draw');
+    // Show modal of draw and a button to reset game.
+
+  } else {
+    changePlayer();
+    console.log('Curr player:', game.currentPlayer);
+    game.turn++;
+    console.log('Curr turn:',game.turn);
+    if (game.currentPlayer === game.computer) {
+      aiMove();
+    }
   }
 }
 
