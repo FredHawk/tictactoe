@@ -25,35 +25,27 @@ function setPlayers () {
 function whoWon () {
   switch (true) {
     case game.board[0] === game.currentPlayer && game.board[1] === game.currentPlayer && game.board[2] === game.currentPlayer: 
-      console.log(`${game.currentPlayer} has won!`);
       return true;
       break;
     case game.board[3] === game.currentPlayer && game.board[4] === game.currentPlayer && game.board[5] === game.currentPlayer: 
-      console.log(`${game.currentPlayer} has won!`);
       return true;
       break;
     case game.board[6] === game.currentPlayer && game.board[7] === game.currentPlayer && game.board[8] === game.currentPlayer: 
-      console.log(`${game.currentPlayer} has won!`);
       return true;
       break;
     case game.board[0] === game.currentPlayer && game.board[3] === game.currentPlayer && game.board[6] === game.currentPlayer: 
-      console.log(`${game.currentPlayer} has won!`);
       return true;
       break;
     case game.board[1] === game.currentPlayer && game.board[4] === game.currentPlayer && game.board[7] === game.currentPlayer: 
-      console.log(`${game.currentPlayer} has won!`);
       return true;
       break;
     case game.board[2] === game.currentPlayer && game.board[5] === game.currentPlayer && game.board[8] === game.currentPlayer: 
-      console.log(`${game.currentPlayer} has won!`);
       return true;
       break;
     case game.board[0] === game.currentPlayer && game.board[4] === game.currentPlayer && game.board[8] === game.currentPlayer: 
-      console.log(`${game.currentPlayer} has won!`);
       return true;
       break;
     case game.board[2] === game.currentPlayer && game.board[4] === game.currentPlayer && game.board[6] === game.currentPlayer: 
-      console.log(`${game.currentPlayer} has won!`);
       return true;
       break;
     default:
