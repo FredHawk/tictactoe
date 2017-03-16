@@ -4,6 +4,11 @@ const gameboard = document.querySelector('.gameboard');
 const reset = document.querySelector('.reset');
 const square = document.querySelectorAll('.square');
 
+const modal = document.querySelector("#modal");
+const modalOverlay = document.querySelector("#modal-overlay");
+const closeButton = document.querySelector("#close-button");
+const openButton = document.querySelector("#open-button");
+
 const game = {
   currentPlayer: 'X',
   human: 'X',
@@ -152,5 +157,16 @@ function handleMove (e) {
   console.log(game.board);
 }
 
+// function load () {
+//   // modal.classList.toggle("closed");
+//   // modalOverlay.classList.toggle("closed");
+// }
 gameboard.addEventListener('click', (e) => handleMove(e));
 reset.addEventListener('click', (e) => resetGame(e));
+
+// closeButton.addEventListener("click", function() {
+//   modal.classList.toggle("closed");
+//   modalOverlay.classList.toggle("closed");
+// });
+
+// window.onload = load;
