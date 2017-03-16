@@ -3,6 +3,9 @@ import css from './style.css';
 const gameboard = document.querySelector('.gameboard');
 const reset = document.querySelector('.reset');
 const square = document.querySelectorAll('.square');
+const easy = document.querySelector('.easy');
+const hard = document.querySelector('.hard');
+const player = document.querySelector('input[name="player"]:checked').value;
 
 const modal = document.querySelector("#modal");
 const modalOverlay = document.querySelector("#modal-overlay");
@@ -11,8 +14,8 @@ const openButton = document.querySelector("#open-button");
 
 const game = {
   currentPlayer: 'X',
-  human: 'X',
-  computer: 'O',
+  human: player,
+  computer: player === 'X' ? 'O' : 'X',
   difficulty: 'easy',
   turn: 0,
   board: [null, null, null,
@@ -131,8 +134,8 @@ function updateState () {
 function resetGame(e) {
   e.preventDefault();
   game.currentPlayer = 'X';
-  game.human = 'X';
-  game.computer = 'O';
+  game.human = player;
+  game.computer = player === 'X' ? 'O' : 'X';
   difficulty: 'easy',
   game.turn = 0;
   game.board = [null, null, null, null, null, null, null, null, null];
@@ -157,16 +160,32 @@ function handleMove (e) {
   console.log(game.board);
 }
 
-// function load () {
-//   // modal.classList.toggle("closed");
-//   // modalOverlay.classList.toggle("closed");
-// }
+function loadGame (e) {
+  e.preventDefault();
+  game.currentPlayer = 'X';
+  game.human = player;
+  game.computer = player === 'X' ? 'O' : 'X';
+  game.difficulty = e.target.textContent.toLowerCase(),
+  game.turn = 0;
+  game.board = [null, null, null, null, null, null, null, null, null];
+  gameboard.innerHTML = `
+      <div id="square1" class="square"></div>
+      <div id="square2" class="square"></div>
+      <div id="square3" class="square"></div>
+      <div id="square4" class="square"></div>
+      <div id="square5" class="square"></div>
+      <div id="square6" class="square"></div>
+      <div id="square7" class="square"></div>
+      <div id="square8" class="square"></div>
+      <div id="square9" class="square"></div>`;
+  modal.classList.toggle("closed");
+  modalOverlay.classList.toggle("closed");
+  if (game.currentPlayer === game.computer) {
+    aiMove();
+  }
+}
+
 gameboard.addEventListener('click', (e) => handleMove(e));
 reset.addEventListener('click', (e) => resetGame(e));
-
-// closeButton.addEventListener("click", function() {
-//   modal.classList.toggle("closed");
-//   modalOverlay.classList.toggle("closed");
-// });
-
-// window.onload = load;
+easy.addEventListener('click', (e) => loadGame(e));
+hard.addEventListener('click', (e) => loadGame(e));
