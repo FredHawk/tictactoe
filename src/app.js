@@ -5,7 +5,7 @@ const reset = document.querySelector('.reset');
 const square = document.querySelectorAll('.square');
 const easy = document.querySelector('.easy');
 const hard = document.querySelector('.hard');
-const player = document.querySelector('input[name="player"]:checked').value;
+
 
 const modal = document.querySelector("#modal");
 const modalOverlay = document.querySelector("#modal-overlay");
@@ -14,8 +14,8 @@ const openButton = document.querySelector("#open-button");
 
 const game = {
   currentPlayer: 'X',
-  human: player,
-  computer: player === 'X' ? 'O' : 'X',
+  human: "",
+  computer: "",
   difficulty: 'easy',
   turn: 0,
   board: [null, null, null,
@@ -132,23 +132,7 @@ function updateState () {
 }
 
 function resetGame(e) {
-  e.preventDefault();
-  game.currentPlayer = 'X';
-  game.human = player;
-  game.computer = player === 'X' ? 'O' : 'X';
-  difficulty: 'easy',
-  game.turn = 0;
-  game.board = [null, null, null, null, null, null, null, null, null];
-  gameboard.innerHTML = `
-      <div id="square1" class="square"></div>
-      <div id="square2" class="square"></div>
-      <div id="square3" class="square"></div>
-      <div id="square4" class="square"></div>
-      <div id="square5" class="square"></div>
-      <div id="square6" class="square"></div>
-      <div id="square7" class="square"></div>
-      <div id="square8" class="square"></div>
-      <div id="square9" class="square"></div>`;
+  loadGame(e);
 }
 
 function handleMove (e) {
@@ -162,6 +146,8 @@ function handleMove (e) {
 
 function loadGame (e) {
   e.preventDefault();
+  const player = document.querySelector('input[name="player"]:checked').value;
+  console.log(player);
   game.currentPlayer = 'X';
   game.human = player;
   game.computer = player === 'X' ? 'O' : 'X';
