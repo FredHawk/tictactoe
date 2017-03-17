@@ -110,6 +110,15 @@ function createEndMessage (gameending) {
   return `${gameending} has won!`;
 }
 
+function showEnd (endMessage) {
+  const node = document.createElement('p');
+  node.classList.add('end-message');
+  const text = document.createTextNode(endMessage);
+  node.appendChild(text);
+  modalGuts.appendChild(node);
+  modal.classList.toggle("closed");
+  modalOverlay.classList.toggle("closed");
+}
 // Update state ? updating the board and changing player and other stuff.
 function updateState () {
   const updatedBoard = game.board.map(render).join('');
@@ -118,20 +127,12 @@ function updateState () {
     modalGuts.removeChild(document.querySelector('.end-message'));
   }
   if (whoWon() === true) {
-    console.log(`${game.currentPlayer} has won!`);
-    // Show modal of who has won and a button to reset game.
     const endMessage = createEndMessage(game.currentPlayer);
-    const node = document.createElement('p');
-    node.classList.add('end-message');
-    const text = document.createTextNode(endMessage);
-    node.appendChild(text);
-    modalGuts.appendChild(node);
-    modal.classList.toggle("closed");
-    modalOverlay.classList.toggle("closed");
+    showEnd(endMessage);
+    
   } else if (game.turn >= 8 && whoWon() == false) {
-    console.log('No winner, it is a draw');
-    // Show modal of draw and a button to reset game.
     const endMessage = createEndMessage("draw");
+    showEnd(endMessage);
   } else {
     changePlayer();
     console.log('Curr player:', game.currentPlayer);
