@@ -5,12 +5,9 @@ const reset = document.querySelector('.reset');
 const square = document.querySelectorAll('.square');
 const easy = document.querySelector('.easy');
 const hard = document.querySelector('.hard');
-
-
 const modal = document.querySelector("#modal");
 const modalOverlay = document.querySelector("#modal-overlay");
-const closeButton = document.querySelector("#close-button");
-const openButton = document.querySelector("#open-button");
+const modalGuts = document.querySelector('.modal-guts');
 
 const game = {
   currentPlayer: 'X',
@@ -26,7 +23,6 @@ const game = {
 // Set which is human and which is AI.
 function setPlayers () {
   game.human == 'X' ? game.computer = 'O' : game.computer = 'X';
-  // Set the game.human and game.computer based on click event listener.
 }
 
 // Function that calculates if someone has won
@@ -107,19 +103,35 @@ function render (cell, index) {
     `;
 }
 
+function createEndMessage (gameending) {
+  if (gameending === "draw") {
+    return `No winner, it is a draw!`;
+  }
+  return `${gameending} has won!`;
+}
 
 // Update state ? updating the board and changing player and other stuff.
 function updateState () {
   const updatedBoard = game.board.map(render).join('');
   gameboard.innerHTML = updatedBoard;
+  if (document.querySelector('.end-message')){
+    modalGuts.removeChild(document.querySelector('.end-message'));
+  }
   if (whoWon() === true) {
     console.log(`${game.currentPlayer} has won!`);
     // Show modal of who has won and a button to reset game.
-
+    const endMessage = createEndMessage(game.currentPlayer);
+    const node = document.createElement('p');
+    node.classList.add('end-message');
+    const text = document.createTextNode(endMessage);
+    node.appendChild(text);
+    modalGuts.appendChild(node);
+    modal.classList.toggle("closed");
+    modalOverlay.classList.toggle("closed");
   } else if (game.turn >= 8 && whoWon() == false) {
     console.log('No winner, it is a draw');
     // Show modal of draw and a button to reset game.
-
+    const endMessage = createEndMessage("draw");
   } else {
     changePlayer();
     console.log('Curr player:', game.currentPlayer);
