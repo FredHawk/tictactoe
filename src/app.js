@@ -85,7 +85,8 @@ function aiMove () {
       }, 900);
     }
   } else {
-
+    // Add minimax solution here
+    
   }
 }
 
