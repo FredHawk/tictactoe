@@ -82,7 +82,7 @@ function aiMove () {
       console.log('rand not null:', rand);
       setTimeout(function() {
         updateState();
-      }, 1000);
+      }, 900);
     }
   } else {
 
@@ -128,11 +128,15 @@ function updateState () {
   }
   if (whoWon() === true) {
     const endMessage = createEndMessage(game.currentPlayer);
-    showEnd(endMessage);
+    setTimeout(function() {
+      showEnd(endMessage);
+    }, 600);
     
   } else if (game.turn >= 8 && whoWon() == false) {
     const endMessage = createEndMessage("draw");
-    showEnd(endMessage);
+    setTimeout(function() {
+      showEnd(endMessage);
+    }, 600);
   } else {
     changePlayer();
     console.log('Curr player:', game.currentPlayer);
@@ -150,7 +154,7 @@ function resetGame(e) {
 
 function handleMove (e) {
   // Check if move is valid, if it is, update board and state
-  if (game.board[(e.target.id.split('').pop()) - 1] === null) {
+  if (game.board[(e.target.id.split('').pop()) - 1] === null && game.currentPlayer === game.human) {
     game.board[(e.target.id.split('').pop()) - 1] = game.currentPlayer;
     updateState();
   }
@@ -183,7 +187,6 @@ function loadGame (e) {
     aiMove();
   }
 }
-
 gameboard.addEventListener('click', (e) => handleMove(e));
 reset.addEventListener('click', (e) => resetGame(e));
 easy.addEventListener('click', (e) => loadGame(e));
