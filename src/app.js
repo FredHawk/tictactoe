@@ -26,36 +26,24 @@ function setPlayers () {
 }
 
 // Function that calculates if someone has won
-function whoWon () {
-  switch (true) {
-    case game.board[0] === game.currentPlayer && game.board[1] === game.currentPlayer && game.board[2] === game.currentPlayer: 
-      return true;
-      break;
-    case game.board[3] === game.currentPlayer && game.board[4] === game.currentPlayer && game.board[5] === game.currentPlayer: 
-      return true;
-      break;
-    case game.board[6] === game.currentPlayer && game.board[7] === game.currentPlayer && game.board[8] === game.currentPlayer: 
-      return true;
-      break;
-    case game.board[0] === game.currentPlayer && game.board[3] === game.currentPlayer && game.board[6] === game.currentPlayer: 
-      return true;
-      break;
-    case game.board[1] === game.currentPlayer && game.board[4] === game.currentPlayer && game.board[7] === game.currentPlayer: 
-      return true;
-      break;
-    case game.board[2] === game.currentPlayer && game.board[5] === game.currentPlayer && game.board[8] === game.currentPlayer: 
-      return true;
-      break;
-    case game.board[0] === game.currentPlayer && game.board[4] === game.currentPlayer && game.board[8] === game.currentPlayer: 
-      return true;
-      break;
-    case game.board[2] === game.currentPlayer && game.board[4] === game.currentPlayer && game.board[6] === game.currentPlayer: 
-      return true;
-      break;
-    default:
-      return false;
-      break;
+function whoWon (board, currentPlayerToken) {
+  const winningBoard = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6],
+  ];
+
+  for (let combination of winningBoard) {
+    let win = combination.every(i => board[i] === currentPlayerToken);
+
+    if (win) return true;
   }
+  return false;
 }
 
 // Function that changes who the currentPlayer is
@@ -127,7 +115,7 @@ function updateState () {
   if (document.querySelector('.end-message')){
     modalGuts.removeChild(document.querySelector('.end-message'));
   }
-  if (whoWon() === true) {
+  if (whoWon(game.board, game.currentPlayer) === true) {
     const endMessage = createEndMessage(game.currentPlayer);
     setTimeout(function() {
       showEnd(endMessage);
