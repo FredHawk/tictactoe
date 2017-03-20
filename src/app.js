@@ -5,14 +5,16 @@ const reset = document.querySelector('.reset');
 const square = document.querySelectorAll('.square');
 const easy = document.querySelector('.easy');
 const hard = document.querySelector('.hard');
-const modal = document.querySelector("#modal");
-const modalOverlay = document.querySelector("#modal-overlay");
+const modal = document.querySelector('#modal');
+const modalTitle = document.querySelector('.modal-title');
+const modalTagline = document.querySelector('.modal-tagline');
+const modalOverlay = document.querySelector('#modal-overlay');
 const modalGuts = document.querySelector('.modal-guts');
 
 const game = {
   currentPlayer: 'X',
-  human: "",
-  computer: "",
+  human: '',
+  computer: '',
   difficulty: 'easy',
   turn: 0,
   board: [null, null, null,
@@ -93,20 +95,21 @@ function render (cell, index) {
 }
 
 function createEndMessage (gameending) {
-  if (gameending === "draw") {
+  if (gameending === 'draw') {
     return `No winner, it is a draw!`;
   }
   return `${gameending} has won!`;
 }
 
 function showEnd (endMessage) {
-  const node = document.createElement('p');
+  const node = document.createElement('h1');
   node.classList.add('end-message');
   const text = document.createTextNode(endMessage);
   node.appendChild(text);
-  modalGuts.appendChild(node);
-  modal.classList.toggle("closed");
-  modalOverlay.classList.toggle("closed");
+  modalGuts.insertBefore(node, modalTitle);
+  modalGuts.removeChild(modalTitle);
+  modal.classList.toggle('closed');
+  modalOverlay.classList.toggle('closed');
 }
 // Update state ? updating the board and changing player and other stuff.
 function updateState () {
@@ -122,7 +125,7 @@ function updateState () {
     }, 600);
     
   } else if (game.turn >= 8 && whoWon() == false) {
-    const endMessage = createEndMessage("draw");
+    const endMessage = createEndMessage('draw');
     setTimeout(function() {
       showEnd(endMessage);
     }, 600);
