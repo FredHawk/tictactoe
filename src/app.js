@@ -102,11 +102,15 @@ function createEndMessage (gameending) {
 }
 
 function showEnd (endMessage) {
-  const node = document.createElement('h1');
-  node.classList.add('end-message');
-  const text = document.createTextNode(endMessage);
-  node.appendChild(text);
-  modalGuts.insertBefore(node, modalTitle);
+  const h1node = document.createElement('h1');
+  const h2node = document.createElement('h2');
+  const h1text = document.createTextNode(endMessage);
+  const h2text = document.createTextNode(`Want to play again?`);
+  h1node.classList.add('end-message');
+  h1node.appendChild(h1text);
+  h2node.appendChild(h2text);
+  modalGuts.insertBefore(h1node, modalTitle);
+  modalGuts.insertBefore(h2node, modalTitle);
   modalGuts.removeChild(modalTitle);
   modal.classList.toggle('closed');
   modalOverlay.classList.toggle('closed');
