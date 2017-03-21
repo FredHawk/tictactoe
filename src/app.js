@@ -11,6 +11,10 @@ const modalTagline = document.querySelector('.modal-tagline');
 const modalOverlay = document.querySelector('#modal-overlay');
 const modalGuts = document.querySelector('.modal-guts');
 
+// How to do no borders on sides.
+// https://css-tricks.com/table-borders-inside/
+
+
 const game = {
   currentPlayer: 'X',
   human: '',
@@ -94,7 +98,6 @@ function render (cell, index) {
       <tr><td id="square${index + 1}" class="square"><span>${checkCell(cell)}</span></td>
     `;
   } else if (((index + 1) % 3) == 0) {
-    console.log(index);
     return `
       <td id="square${index + 1}" class="square"><span>${checkCell(cell)}</span></td></tr>
     `;
