@@ -112,7 +112,7 @@ function showEnd (endMessage) {
   h2node.appendChild(h2text);
   modalGuts.insertBefore(h1node, modalTagline);
   modalGuts.insertBefore(h2node, modalTagline);
-  if (modalTitle === true) {
+  if (document.querySelector('.modal-title')) {
     modalGuts.removeChild(modalTitle);
   }
   modal.classList.toggle('closed');
