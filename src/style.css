@@ -13,21 +13,17 @@ body {
   text-align: center;
 }
 .gameboard {
-  display: flex;
-  flex-wrap: wrap;
   max-width: 300px;
   min-width: 270px;
+  border-collapse: collapse;
 }
 
 .square {
-  height: 98px;
+  height: 95px;
+  width: 95px;
   border: blue solid 1px;
-  flex: 0 0 32%;
-  font-size: 4rem;
+  font-size: 3rem;
   text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .modal {

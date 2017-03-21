@@ -89,9 +89,20 @@ function checkCell (cell) {
 }
 
 function render (cell, index) {
-  return `
-      <div id="square${index + 1}" class="square"><span>${checkCell(cell)}</span></div>
+  if ((index % 3) == 0) {
+    return `
+      <tr><td id="square${index + 1}" class="square"><span>${checkCell(cell)}</span></td>
     `;
+  } else if (((index + 1) % 3) == 0) {
+    console.log(index);
+    return `
+      <td id="square${index + 1}" class="square"><span>${checkCell(cell)}</span></td></tr>
+    `;
+  } else {
+  return `
+      <td id="square${index + 1}" class="square"><span>${checkCell(cell)}</span></td>
+    `;
+  }
 }
 
 function createEndMessage (gameending) {
@@ -171,15 +182,22 @@ function loadGame (e) {
   game.turn = 0;
   game.board = [null, null, null, null, null, null, null, null, null];
   gameboard.innerHTML = `
-      <div id="square1" class="square"></div>
-      <div id="square2" class="square"></div>
-      <div id="square3" class="square"></div>
-      <div id="square4" class="square"></div>
-      <div id="square5" class="square"></div>
-      <div id="square6" class="square"></div>
-      <div id="square7" class="square"></div>
-      <div id="square8" class="square"></div>
-      <div id="square9" class="square"></div>`;
+      <tr>
+        <td id="square1" class="square"></td>
+        <td id="square2" class="square"></td>
+        <td id="square3" class="square"></td>
+      </tr>
+      <tr>
+        <td id="square4" class="square"></td>
+        <td id="square5" class="square"></td>
+        <td id="square6" class="square"></td>
+      </tr>
+      <tr>
+        <td id="square7" class="square"></td>
+        <td id="square8" class="square"></td>
+        <td id="square9" class="square"></td>
+      </tr>
+    </table>`;
   modal.classList.toggle("closed");
   modalOverlay.classList.toggle("closed");
   if (game.currentPlayer === game.computer) {
