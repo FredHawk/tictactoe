@@ -107,11 +107,14 @@ function showEnd (endMessage) {
   const h1text = document.createTextNode(endMessage);
   const h2text = document.createTextNode(`Want to play again?`);
   h1node.classList.add('end-message');
+  h2node.classList.add('end-message');
   h1node.appendChild(h1text);
   h2node.appendChild(h2text);
-  modalGuts.insertBefore(h1node, modalTitle);
-  modalGuts.insertBefore(h2node, modalTitle);
-  modalGuts.removeChild(modalTitle);
+  modalGuts.insertBefore(h1node, modalTagline);
+  modalGuts.insertBefore(h2node, modalTagline);
+  if (modalTitle === true) {
+    modalGuts.removeChild(modalTitle);
+  }
   modal.classList.toggle('closed');
   modalOverlay.classList.toggle('closed');
 }
