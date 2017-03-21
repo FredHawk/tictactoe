@@ -145,7 +145,7 @@ function updateState () {
       showEnd(endMessage);
     }, 600);
     
-  } else if (game.turn >= 8 && whoWon() == false) {
+  } else if (game.turn >= 8 && whoWon(game.board, game.currentPlayer) == false) {
     const endMessage = createEndMessage('draw');
     setTimeout(function() {
       showEnd(endMessage);
