@@ -4,6 +4,7 @@
 
 body {
   background: var(--color-background);
+  font-family: 'Roboto', sans-serif;
 }
 
 .wrapper {
@@ -12,6 +13,7 @@ body {
   align-items: center;
   text-align: center;
 }
+
 .gameboard {
   max-width: 300px;
   min-width: 270px;
@@ -21,9 +23,16 @@ body {
 .square {
   height: 95px;
   width: 95px;
-  border: blue solid 1px;
   font-size: 3rem;
+  font-family: 'Gloria Hallelujah', cursive;
   text-align: center;
+
+}
+table td:not(:first-child) {
+  border-left: 3px solid blue;
+}
+table tr:not(:first-child) td {
+  border-top: 3px solid blue;
 }
 
 .modal {
