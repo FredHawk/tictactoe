@@ -73,18 +73,15 @@ function getRandomCell () {
 }
 
 function makeRandomMove() {
-    const rand = getRandomCell();
-    console.log('Move:', rand);
-    if (game.board[rand]) {
-      // run the randomize function again
-      makeRandomMove();
-      console.log('Rand is null:', rand);
-    } else {
-      // update array
-      game.board[rand] = game.currentPlayer;
-      return true;
-      console.log('Rand not null:', rand);
-    }
+  const rand = getRandomCell();
+  if (game.board[rand]) {
+    // run the randomize function again
+    makeRandomMove();
+  } else {
+    // update array
+    game.board[rand] = game.currentPlayer;
+    return true;
+  }
 }
 function aiMove () {
   if (game.difficulty == 'easy') {
@@ -98,50 +95,25 @@ function aiMove () {
     // Check if the computer has a winning move
     let move = findWinningMove(game.board, game.computer);
     if (move) {
-      console.log('AI winning move available');
       game.board[move] = game.computer;
-      // setTimeout(function() {
-      //   updateState();
-      // }, 900);
-    }
-    
-    move = findWinningMove(game.board, game.human);
-    if (move) {
-    // If the computer doesn't have a winning move, check if the human has a winning move.
-    console.log('Human winning move available');
-      
-      game.board[move] = game.computer;
-      // setTimeout(function() {
-      //   updateState();
-      // }, 900);
-    } 
-    
-    console.log('No winning move available');
-    // If no player has a winning move, make a random move.
-    // function makeRandomMove() {
-    //     move = getRandomCell();
-    //     console.log('Move:', move);
-    //     if (game.board[move]) {
-    //       // run the randomize function again
-    //       makeRandomMove();
-    //       console.log('Rand is null:', move);
-    //     } else {
-    //       // update array
-    //       game.board[move] = game.currentPlayer;
-    //       console.log('Rand not null:', move);
-    //       // setTimeout(function() {
-    //       //   updateState();
-    //       // }, 900);
-    //     }
-    //   setTimeout(function() {
-    //     updateState();
-    //   }, 900);
-    // }
-    const hardMove = makeRandomMove();
-    if (hardMove = true) {
       setTimeout(function() {
         updateState();
       }, 900);
+    } else if (findWinningMove(game.board, game.human)) {
+      // If the computer doesn't have a winning move, check if the human has a winning move.
+      move = findWinningMove(game.board, game.human);      
+      game.board[move] = game.computer;
+      setTimeout(function() {
+        updateState();
+      }, 900);
+    } else {
+      // If no player has a winning move, make a random move.
+      const hardMove = makeRandomMove();
+      if (hardMove = true) {
+        setTimeout(function() {
+          updateState();
+        }, 900);
+      }
     }
   }
 }
@@ -214,9 +186,7 @@ function updateState () {
     }, 600);
   } else {
     changePlayer();
-    console.log('Curr player:', game.currentPlayer);
     game.turn++;
-    console.log('Curr turn:',game.turn);
     if (game.currentPlayer === game.computer) {
       aiMove();
     }
@@ -233,13 +203,11 @@ function handleMove (e) {
     game.board[(e.target.id.split('').pop()) - 1] = game.currentPlayer;
     updateState();
   }
-  console.log(game.board);
 }
 
 function loadGame (e) {
   e.preventDefault();
   const player = document.querySelector('input[name="player"]:checked').value;
-  console.log(player);
   game.currentPlayer = 'X';
   game.human = player;
   game.computer = player === 'X' ? 'O' : 'X';
@@ -265,7 +233,6 @@ function loadGame (e) {
     </table>`;
   modal.classList.toggle("closed");
   modalOverlay.classList.toggle("closed");
-    console.log(game.difficulty);
   if (game.currentPlayer === game.computer) {
     aiMove();
   }
