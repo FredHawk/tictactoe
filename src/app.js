@@ -72,19 +72,24 @@ function getRandomCell () {
   return Math.floor(Math.random() * game.board.length);
 }
 
-function aiMove () {
-  if (game.difficulty == 'easy') {
-
+function makeRandomMove() {
     const rand = getRandomCell();
-    console.log('rand:', rand);
+    console.log('Move:', rand);
     if (game.board[rand]) {
       // run the randomize function again
-      aiMove();
-      console.log('rand is null:', rand);
+      makeRandomMove();
+      console.log('Rand is null:', rand);
     } else {
       // update array
       game.board[rand] = game.currentPlayer;
-      console.log('rand not null:', rand);
+      return true;
+      console.log('Rand not null:', rand);
+    }
+}
+function aiMove () {
+  if (game.difficulty == 'easy') {
+    const move = makeRandomMove();
+    if (move = true) {
       setTimeout(function() {
         updateState();
       }, 900);
@@ -113,23 +118,31 @@ function aiMove () {
     
     console.log('No winning move available');
     // If no player has a winning move, make a random move.
-      move = getRandomCell();
-      console.log('Rand:', move);
-      if (game.board[move]) {
-        // run the randomize function again
-        aiMove();
-        console.log('Rand is null:', move);
-      } else {
-        // update array
-        game.board[move] = game.currentPlayer;
-        console.log('Rand not null:', move);
-        // setTimeout(function() {
-        //   updateState();
-        // }, 900);
-      }
-    setTimeout(function() {
-          updateState();
-        }, 900);
+    // function makeRandomMove() {
+    //     move = getRandomCell();
+    //     console.log('Move:', move);
+    //     if (game.board[move]) {
+    //       // run the randomize function again
+    //       makeRandomMove();
+    //       console.log('Rand is null:', move);
+    //     } else {
+    //       // update array
+    //       game.board[move] = game.currentPlayer;
+    //       console.log('Rand not null:', move);
+    //       // setTimeout(function() {
+    //       //   updateState();
+    //       // }, 900);
+    //     }
+    //   setTimeout(function() {
+    //     updateState();
+    //   }, 900);
+    // }
+    const hardMove = makeRandomMove();
+    if (hardMove = true) {
+      setTimeout(function() {
+        updateState();
+      }, 900);
+    }
   }
 }
 
