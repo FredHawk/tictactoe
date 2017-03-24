@@ -28,7 +28,7 @@ function setPlayers () {
 }
 
 // Function that calculates if someone has won
-function whoWon (board, currentPlayerToken) {
+function whoWon (board, token) {
   const winningBoard = [
     [0, 1, 2],
     [3, 4, 5],
@@ -41,10 +41,25 @@ function whoWon (board, currentPlayerToken) {
   ];
 
   for (let combination of winningBoard) {
-    let win = combination.every(i => board[i] === currentPlayerToken);
+    let win = combination.every(i => board[i] === token);
 
     if (win) return true;
   }
+  return false;
+}
+
+// Check if there is a winning move to make.
+function findWinningMove(board, token) {
+
+  for (let i in board) {
+    if (board[i] !== null) continue;
+
+    let newBoard = [...board];
+    newBoard[i] = token;
+    let win = whoWon(newBoard, token);
+    if (win == true) return +i;
+  }
+
   return false;
 }
 
@@ -75,8 +90,46 @@ function aiMove () {
       }, 900);
     }
   } else {
-    // Add minimax solution here
+    // Check if the computer has a winning move
+    let move = findWinningMove(game.board, game.computer);
+    if (move) {
+      console.log('AI winning move available');
+      game.board[move] = game.computer;
+      // setTimeout(function() {
+      //   updateState();
+      // }, 900);
+    }
     
+    move = findWinningMove(game.board, game.human);
+    if (move) {
+    // If the computer doesn't have a winning move, check if the human has a winning move.
+    console.log('Human winning move available');
+      
+      game.board[move] = game.computer;
+      // setTimeout(function() {
+      //   updateState();
+      // }, 900);
+    } 
+    
+    console.log('No winning move available');
+    // If no player has a winning move, make a random move.
+      move = getRandomCell();
+      console.log('Rand:', move);
+      if (game.board[move]) {
+        // run the randomize function again
+        aiMove();
+        console.log('Rand is null:', move);
+      } else {
+        // update array
+        game.board[move] = game.currentPlayer;
+        console.log('Rand not null:', move);
+        // setTimeout(function() {
+        //   updateState();
+        // }, 900);
+      }
+    setTimeout(function() {
+          updateState();
+        }, 900);
   }
 }
 
@@ -199,6 +252,7 @@ function loadGame (e) {
     </table>`;
   modal.classList.toggle("closed");
   modalOverlay.classList.toggle("closed");
+    console.log(game.difficulty);
   if (game.currentPlayer === game.computer) {
     aiMove();
   }
