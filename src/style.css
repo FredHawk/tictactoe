@@ -1,5 +1,10 @@
 :root {
   --color-background: #4CA68B;
+  --color-modalbg: #4999B3;
+  --color-buttonbg: #4DBDBB;
+  --color-boardborder: #2F6656;
+  --color-footertext: #B8F2E1;
+  --color-tokencolor: #6FF2CB;
 }
 
 body {
@@ -7,7 +12,19 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
+button {
+  font-size: 1.5rem;
+  background: var(--color-buttonbg);
+  /*border: 2px var(--color-background) solid;*/
+  border: none;
+
+}
+h1 {
+  font-size: 3rem;
+}
 .wrapper {
+  max-width: 55rem;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -21,6 +38,8 @@ body {
   max-width: 300px;
   min-width: 270px;
   border-collapse: collapse;
+  color: var(--color-tokencolor);
+  margin-bottom: 2rem;
 }
 
 .square {
@@ -32,10 +51,10 @@ body {
 
 }
 table td:not(:first-child) {
-  border-left: 3px solid blue;
+  border-left: 3px solid var(--color-boardborder);
 }
 table tr:not(:first-child) td {
-  border-top: 3px solid blue;
+  border-top: 3px solid var(--color-boardborder);
 }
 
 .modal {
@@ -66,10 +85,22 @@ table tr:not(:first-child) td {
   background: rgba(0, 0, 0, 0.6);
 }
 .modal-guts {
+  background: var(--color-modalbg);
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   overflow: auto;
+}
+footer {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  color: var(--color-footertext);
+}
+footer a {
+  /*text-decoration: none;*/
+  color: var(--color-footertext);
 }
