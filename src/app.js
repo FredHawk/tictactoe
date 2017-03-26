@@ -75,10 +75,8 @@ function getRandomCell () {
 function makeRandomMove() {
   const rand = getRandomCell();
   if (game.board[rand]) {
-    // run the randomize function again
     makeRandomMove();
   } else {
-    // update array
     game.board[rand] = game.currentPlayer;
     return true;
   }
@@ -86,36 +84,23 @@ function makeRandomMove() {
 function aiMove () {
   if (game.difficulty == 'easy') {
     const move = makeRandomMove();
-    if (move = true) {
-      setTimeout(function() {
-        updateState();
-      }, 900);
-    }
   } else {
     // Check if the computer has a winning move
     let move = findWinningMove(game.board, game.computer);
     if (move) {
       game.board[move] = game.computer;
-      setTimeout(function() {
-        updateState();
-      }, 900);
     } else if (findWinningMove(game.board, game.human)) {
       // If the computer doesn't have a winning move, check if the human has a winning move.
       move = findWinningMove(game.board, game.human);      
       game.board[move] = game.computer;
-      setTimeout(function() {
-        updateState();
-      }, 900);
     } else {
       // If no player has a winning move, make a random move.
       const hardMove = makeRandomMove();
-      if (hardMove = true) {
-        setTimeout(function() {
-          updateState();
-        }, 900);
-      }
     }
   }
+  setTimeout(function() {
+    updateState();
+  }, 900);
 }
 
 function checkCell (cell) {
