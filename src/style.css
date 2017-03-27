@@ -96,11 +96,12 @@ table tr:not(:first-child) td {
 footer {
   width: 100%;
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-end;
   align-items: center;
   color: var(--color-footertext);
+  font-size: 0.7em;
 }
 footer a {
-  /*text-decoration: none;*/
+  margin-left: 1rem;
   color: var(--color-footertext);
 }
