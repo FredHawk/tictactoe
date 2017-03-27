@@ -22,12 +22,10 @@ const game = {
           null, null, null],
 }
 
-// Set which is human and which is AI.
 function setPlayers () {
   game.human == 'X' ? game.computer = 'O' : game.computer = 'X';
 }
 
-// Function that calculates if someone has won
 function whoWon (board, token) {
   const winningBoard = [
     [0, 1, 2],
@@ -39,7 +37,6 @@ function whoWon (board, token) {
     [0, 4, 8],
     [2, 4, 6],
   ];
-
   for (let combination of winningBoard) {
     let win = combination.every(i => board[i] === token);
 
@@ -48,9 +45,7 @@ function whoWon (board, token) {
   return false;
 }
 
-// Check if there is a winning move to make.
 function findWinningMove(board, token) {
-
   for (let i in board) {
     if (board[i] !== null) continue;
 
@@ -59,11 +54,9 @@ function findWinningMove(board, token) {
     let win = whoWon(newBoard, token);
     if (win == true) return +i;
   }
-
   return false;
 }
 
-// Function that changes who the currentPlayer is
 function changePlayer () {
   game.currentPlayer == 'X' ? game.currentPlayer = 'O' : game.currentPlayer = 'X';
 }
@@ -81,6 +74,7 @@ function makeRandomMove() {
     return true;
   }
 }
+
 function aiMove () {
   if (game.difficulty == 'easy') {
     const move = makeRandomMove();
@@ -151,7 +145,7 @@ function showEnd (endMessage) {
   modal.classList.toggle('closed');
   modalOverlay.classList.toggle('closed');
 }
-// Update state ? updating the board and changing player and other stuff.
+
 function updateState () {
   const updatedBoard = game.board.map(render).join('');
   gameboard.innerHTML = updatedBoard;
