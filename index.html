@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah|Roboto" rel="stylesheet">
+  <title>Ticcy Taccy Toe</title>
+<link href="style.css?2d5f0d5ea700c2c53104" rel="stylesheet"></head>
+<body>
+  <div class="wrapper">
+    <h1>Ticcy Taccy Toe</h1>
+    <h3 class="tagline">Happy game! Happy life!</h3>
+    <div>
+      <button class="reset">Restart game</button>
+      <table class="gameboard">
+        <tr>
+          <td id="square1" class="square"></td>
+          <td id="square2" class="square"></td>
+          <td id="square3" class="square"></td>
+        </tr>
+        <tr>
+          <td id="square4" class="square"></td>
+          <td id="square5" class="square"></td>
+          <td id="square6" class="square"></td>
+        </tr>
+        <tr>
+          <td id="square7" class="square"></td>
+          <td id="square8" class="square"></td>
+          <td id="square9" class="square"></td>
+        </tr>
+      </table>
+    </div>
+    <div class="modal-overlay" id="modal-overlay"></div>
+
+    <div class="modal" id="modal">
+      <div class="modal-guts">
+        <h1 class="modal-title">Lets play a game!</h1>
+        <h3 class="modal-tagline">Pick which you want to be.</h3>
+        <form>
+          <input type="radio" name="player" value="X" class="player x" checked="checked"> X
+          <input type="radio" name="player" value="O" class="player o"> O
+        </form>
+        <h3>Pick the difficulty</h3>
+        <button class="difficulty easy">Easy</button>
+        <button class="difficulty hard">Hard</button>
+      </div>
+    </div>
+    <footer>
+      <p class="madeby">Made by Fred Hawk</p>
+      <a class="githublink" href="https://github.com/FredHawk/tictactoe">Project on Github</a>
+    </footer>
+  </div>
+<script type="text/javascript" src="app.bundle.js?2d5f0d5ea700c2c53104"></script></body>
+</html>
